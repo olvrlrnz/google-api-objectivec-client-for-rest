@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.5
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 import PackageDescription
 
@@ -1172,7 +1172,7 @@ let package = Package(
         // End of products.
     ],
     dependencies: [
-        .package(url: "https://github.com/google/gtm-session-fetcher.git", "1.6.1" ..< "4.0.0"),
+        .package(url: "https://github.com/olvrlrnz/gtm-session-fetcher.git", branch: "enable-logging")
     ],
     targets: [
         .target(
@@ -1184,7 +1184,10 @@ let package = Package(
             resources: [
               .process("Resources/PrivacyInfo.xcprivacy")
             ],
-            publicHeadersPath: "Public"
+            publicHeadersPath: "Public",
+            cSettings: [
+                .define("STRIP_GTM_FETCH_LOGGING", to: "0")
+            ]
         ),
         .testTarget(
             name: "GoogleAPIClientForRESTTests",
